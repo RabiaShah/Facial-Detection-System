@@ -1,0 +1,43 @@
+
+Student ID: 01-131152-041
+Student Name: Rabia
+Department: SE
+University: BU
+CGPA: 3.76
+Semester: 6
+x
+Student ID: 01-131152-033
+Student Name: Ramish
+Department: SE
+University: BU
+CGPA: 3.2
+Semester: 6
+x
+Student ID: 01-131152-056
+Student Name: HELLO
+Department: SE
+University: BU
+CGPA: 3.1
+Semester: 6
+x
+Student ID: 01-131152-136
+Student Name: Abbas
+Department: SE
+University: BU
+CGPA: 4
+Semester: 4
+x
+Student ID: 01-131152-031
+Student Name: Fakhir
+Department: SE
+University: BU
+CGPA: 3.86
+Semester: 4
+x
+Student ID: 01-131152-048
+Student Name: Zainab
+Department: SE
+University: BU
+CGPA: 4
+Semester: 6
+x

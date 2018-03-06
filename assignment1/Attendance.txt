@@ -1,0 +1,36 @@
+Semester: 6
+Student ID: 01-131152-041
+Student Name: Rabia
+Attendance: p
+Date: 05-Mar-18 9:37:31 PM
+x
+Semester: 6
+Student ID: 01-131152-033
+Student Name: Ramish
+Attendance: p
+Date: 05-Mar-18 9:37:33 PM
+x
+Semester: 6
+Student ID: 01-131152-056
+Student Name: HELLO
+Attendance: a
+Date: 05-Mar-18 9:37:34 PM
+x
+Semester: 6
+Student ID: 01-131152-048
+Student Name: Zainab
+Attendance: a
+Date: 05-Mar-18 9:37:35 PM
+x
+Semester: 4
+Student ID: 01-131152-136
+Student Name: Abbas
+Attendance: p
+Date: 05-Mar-18 9:37:43 PM
+x
+Semester: 4
+Student ID: 01-131152-031
+Student Name: Fakhir
+Attendance: p
+Date: 05-Mar-18 9:37:44 PM
+x
