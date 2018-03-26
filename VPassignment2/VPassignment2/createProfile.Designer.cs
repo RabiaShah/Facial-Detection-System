@@ -170,6 +170,7 @@
             this.button2.TabIndex = 16;
             this.button2.Text = "Clear";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // comboBoxSem
             // 
@@ -224,6 +225,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Name = "createProfile";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "createProfile";
             this.Load += new System.EventHandler(this.createProfile_Load);
             this.ResumeLayout(false);
@@ -240,7 +242,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textID;
         private System.Windows.Forms.TextBox textName;
         private System.Windows.Forms.TextBox textUni;
         private System.Windows.Forms.Button button1;
@@ -248,5 +249,6 @@
         private System.Windows.Forms.ComboBox comboBoxSem;
         private System.Windows.Forms.TextBox textCGPA;
         private System.Windows.Forms.TextBox textDept;
+        public System.Windows.Forms.TextBox textID;
     }
 }

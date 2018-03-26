@@ -14,7 +14,8 @@ namespace VPassignment2
     {
         float cgpa = 0.0f;
         string ID = "", Name = "", Dept = "", Uni = "";
-        int semester = 0;
+        int semester = 0; bool correct = false;
+        HelperClass obj = new HelperClass();
         public createProfile()
         {
             InitializeComponent();
@@ -37,7 +38,48 @@ namespace VPassignment2
 
         private void button1_Click(object sender, EventArgs e)
         {
+            try
+            {
+                ID = textID.Text.ToString();
+                Name = textName.Text.ToString();
+                Uni = textUni.Text.ToString();
+                Dept = textDept.Text;
+                semester = Convert.ToInt32(comboBoxSem.Text);
+                cgpa = float.Parse(textCGPA.Text);
+                if (ID == "" || Name == "" || Dept == "" || Uni == "")
+                {
+                    MessageBox.Show("No field can be empty");
+                }
+                // else if (!obj.CheckUniqueID(ID, out correct))
+                //{
+                //    ID = textID.Text.ToString();
+                //     while(!correct)
+                //     {
 
+                //     }
+                //}
+                else
+                {
+                    obj.CreateProfile(ID, Name, Dept, Uni, semester, cgpa);
+                    Form1 f1 = new Form1();
+                    f1.Show();
+                    this.Hide();
+                }
+            }
+            catch(Exception ee)
+            {
+                MessageBox.Show(ee.Message);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            textID.Text = "";
+            textName.Text = "";
+            textUni.Text = "";
+            textDept.Text = "";
+            comboBoxSem.Text = "";
+            textCGPA.Text = "";
         }
     }
 }

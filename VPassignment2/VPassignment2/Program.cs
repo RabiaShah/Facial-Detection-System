@@ -16,7 +16,7 @@ namespace VPassignment2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new createProfile());
+            Application.Run(new Search_Student());
         }
     }
 }

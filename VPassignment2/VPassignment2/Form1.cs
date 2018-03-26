@@ -24,7 +24,21 @@ namespace VPassignment2
 
         private void button1_Click(object sender, EventArgs e)
         {
+            createProfile cp = new createProfile();
+            cp.Show();
+            this.Hide();
+        }
 
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Delete dl = new Delete();
+            dl.Show();
+            this.Hide();
         }
     }
 }
