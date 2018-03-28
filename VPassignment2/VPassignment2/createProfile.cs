@@ -15,7 +15,6 @@ namespace VPassignment2
         float cgpa = 0.0f;
         string ID = "", Name = "", Dept = "", Uni = "";
         int semester = 0; bool correct = false;
-        HelperClass obj = new HelperClass();
         public createProfile()
         {
             InitializeComponent();
@@ -60,8 +59,8 @@ namespace VPassignment2
                 //}
                 else
                 {
-                    obj.CreateProfile(ID, Name, Dept, Uni, semester, cgpa);
-                    Form1 f1 = new Form1();
+                    HelperClass.Help.CreateProfile(ID, Name, Dept, Uni, semester, cgpa);
+                    Main f1 = new Main();
                     f1.Show();
                     this.Hide();
                 }

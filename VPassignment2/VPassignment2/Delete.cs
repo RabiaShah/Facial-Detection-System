@@ -15,7 +15,7 @@ namespace VPassignment2
     {
         string ID = "", result;
         
-        HelperClass obj = new HelperClass();
+       
         public Delete()
         {
             InitializeComponent();
@@ -25,18 +25,23 @@ namespace VPassignment2
         {
             
             ID = textID.Text.ToString();
-            result = obj.DeleteRecord(ID);
+            result = HelperClass.Help.DeleteRecord(ID);
             if (result.Equals("No Record Found!"))
                 MessageBox.Show("No Record Found!");
             else
             {
-                StreamWriter writer = new StreamWriter(@"C:\Users\rabia\Desktop\happy.txt");
+                StreamWriter writer = new StreamWriter(HelperClass.Help.Path1);
                 writer.AutoFlush = true;
                 writer.WriteLine(result);
                 MessageBox.Show("The Record Has Been Successfully Deleted!");
                 writer.Close();
             }
             
+        }
+
+        private void Delete_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
