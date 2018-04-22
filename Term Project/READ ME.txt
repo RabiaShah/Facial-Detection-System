@@ -1,0 +1,9 @@
+      ___________________________________________________________________
+                              Face Detection
+			For Criminal Face Recognition
+      ___________________________________________________________________
+
+
+In this project, we are going to use webcam and will take a picture of the person who is in front of the webcam and will check whether that person’s record exist in our wanted people’s list or not. 
+There will be some pictures already stored in our database.
+This is an image processing project in which scans the face of a person using the webcam, identify different pattern of a person’s face and will match the facial features with some pictures of wanted people and will detect that whether this person is in wanted list or not.
