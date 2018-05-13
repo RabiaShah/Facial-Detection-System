@@ -1,5 +1,4 @@
 ﻿using Emgu.CV;
-using Emgu.CV.UI;
 using Emgu.CV.Util;
 using Emgu.CV.Structure;
 using Emgu.CV.CvEnum;
@@ -14,21 +13,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Project
 {
     public partial class LoadImg : Form
     {
-        public  Image<Bgr, byte> imageFrame;
-        private int WindowSize = 25;
-        private double scaleIR = 1.1;
-        private int min = 3;
-        private HaarCascade haar;
-        Bitmap[] ExtFaces;
-        int faceNo = 0;
+        public  Image<Bgr, byte> img;
+        Bitmap ExtFace;
+        Graphics painter;
+
 
         public LoadImg()
         {
             InitializeComponent();
+            img = null;
         }
 
         private void btnDetails_Click(object sender, EventArgs e)
@@ -37,34 +35,38 @@ namespace Project
             OpenFileDialog obj = new OpenFileDialog();
             if(obj.ShowDialog()==DialogResult.OK)
             {
-                imageFrame = new Image<Bgr, byte>(obj.FileName);
-                imageBox1.Image = imageFrame;
+                img = new Image<Bgr, byte>(obj.FileName);
+                imageBox1.Image = img;
                 DetectFaces();
             }
         }
 
         private void DetectFaces()
         {
-            
-            Image<Gray, byte> grayframe = imageFrame.Convert<Gray, byte>();
-            var faces = haar.Detect(grayframe, scaleIR, min, HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(WindowSize,WindowSize), new Size(WindowSize,WindowSize));
-            Bitmap bmpInput = grayframe.ToBitmap();
-            Bitmap ExtractedFaces;
-            Graphics FaceCanvas;
-            ExtFaces = new Bitmap[faces.Length];
-            faceNo = 0;
-            if(faces.Length>0)
-            {
-                foreach(var face in faces)
+            try
+            {                
+                Image<Gray, byte> gray = img.Convert<Gray, byte>();
+                
+                imageBox1.Image = img;
+                string path = "haarcascade_frontalface_default.xml";
+                CascadeClassifier cass = new CascadeClassifier(path);
+                Rectangle[] faces = cass.DetectMultiScale(gray, 1.2, 4);
+                foreach (var face in faces)
                 {
-                    imageFrame.Draw(face.rect, new Bgr(Color.Green), 3);
-                    ExtractedFaces = new Bitmap(face.rect.Width, face.rect.Height);
-                    FaceCanvas = Graphics.FromImage(ExtractedFaces);
-                    FaceCanvas.DrawImage(bmpInput, 0, 0, face.rect, GraphicsUnit.Pixel);
-                    ExtFaces[faceNo] = ExtractedFaces;
-                    faceNo++;
+                    img.Draw(face, new Bgr(0, 255, 0), 3);
+                    ExtFace = new Bitmap(face.Width, face.Height);
+                    painter = Graphics.FromImage(ExtFace);
+                    painter.DrawImage(gray.Bitmap, 0, 0, face, GraphicsUnit.Pixel);
                 }
-                imageBox1.Image = imageFrame;
+                MessageBox.Show("Faces detected: " + faces.Length);
+                imageBox1.Image = img;
+                imageBox2.Image = new Image<Bgr,Byte>(ExtFace);
+                //pictureBox1.Image = ExtFace;
+             
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.Message);
             }
         }
         private void button1_Click(object sender, EventArgs e)
@@ -76,19 +78,10 @@ namespace Project
 
         private void LoadImg_Load(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    haar = new HaarCascade("haarcascade_frontalface_alt_tree.xml");
-            //}
-            //catch (Exception ee)
-            //{
-            //    MessageBox.Show(ee.Message);
-            //}
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-
         }
     }
 }

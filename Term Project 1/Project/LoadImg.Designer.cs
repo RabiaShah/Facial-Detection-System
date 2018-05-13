@@ -95,9 +95,10 @@
             // 
             // imageBox2
             // 
-            this.imageBox2.Location = new System.Drawing.Point(550, 141);
+            this.imageBox2.Location = new System.Drawing.Point(550, 132);
             this.imageBox2.Name = "imageBox2";
-            this.imageBox2.Size = new System.Drawing.Size(155, 139);
+            this.imageBox2.Size = new System.Drawing.Size(155, 162);
+            this.imageBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.imageBox2.TabIndex = 2;
             this.imageBox2.TabStop = false;
             // 

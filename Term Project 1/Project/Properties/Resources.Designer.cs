@@ -63,6 +63,16 @@ namespace Project.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _104028037688336231789594147054147510527188n {
+            get {
+                object obj = ResourceManager.GetObject("104028037688336231789594147054147510527188n", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _31061468_976249289209152_3606521597940203520_n {
             get {
                 object obj = ResourceManager.GetObject("31061468_976249289209152_3606521597940203520_n", resourceCulture);
@@ -76,6 +86,16 @@ namespace Project.Properties {
         internal static System.Drawing.Bitmap _31061468_976249289209152_3606521597940203520_n__1_ {
             get {
                 object obj = ResourceManager.GetObject("31061468_976249289209152_3606521597940203520_n (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap lena {
+            get {
+                object obj = ResourceManager.GetObject("lena", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

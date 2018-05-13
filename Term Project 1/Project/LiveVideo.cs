@@ -10,12 +10,11 @@ using System.Windows.Forms;
 using AForge.Video.DirectShow;
 using AForge.Video;
 using Emgu.CV;
-using Emgu.CV.UI;
 using Emgu.CV.Util;
 using Emgu.CV.Structure;
-using Emgu.CV.CvEnum;
+//using Emgu.CV.CvEnum;
 
-//using System.Text.RegularExpressions;
+
 
 namespace Project
 {
@@ -24,13 +23,17 @@ namespace Project
         
         private FilterInfoCollection webcam;
         private VideoCaptureDevice videoSource;
-        //private Capture capture;
-        //private HaarCascade haar;
+        private Capture capture;
+        private CascadeClassifier classifier;
+        private Bitmap faceDetected;
+        private Graphics painter;
         
         
         public LiveVideo()
         {
             
+            classifier = new CascadeClassifier("haarcascade_frontalface_default.xml");
+            videoSource = new VideoCaptureDevice();
             InitializeComponent();
         }
 
@@ -50,15 +53,17 @@ namespace Project
             {
                 MessageBox.Show("No video sources found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            videoSource = new VideoCaptureDevice();
+            
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            videoSource = new VideoCaptureDevice(webcam[cmbVideoDevices.SelectedIndex].MonikerString);
-            videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
-            videoSource.Start();
-            
+            //videoSource = new VideoCaptureDevice(webcam[cmbVideoDevices.SelectedIndex].MonikerString);
+            //videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
+            //videoSource.Start();
+            capture = new Capture();
+            if (capture != null)
+                    Application.Idle += ProcessImage;
         }
 
         private void video_NewFrame(object sender, NewFrameEventArgs eventArgs)
@@ -69,36 +74,44 @@ namespace Project
 
         private void button1_Click(object sender, EventArgs e)
         {
-            pictureBox2.Image = pictureBox1.Image;
+            pictureBox2.Image = faceDetected;
         }
-
+        
         private void btnCheck_Click(object sender, EventArgs e)
         {
             PictureComparison obj = new PictureComparison();
             obj.Show();
             this.Hide();
+            if(videoSource.IsRunning || capture!=null)
+            {
+                videoSource.Stop();
+                //capture.Dispose();
+            }
+            
+             
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }
-        //private void ProcessImage(object sender, EventArgs e)
-        //{
+        private void ProcessImage(object sender, EventArgs e)
+        {
+            Image<Bgr, Byte> imageFrame = new Image<Bgr,byte>(capture.QueryFrame().Bitmap);
+            if (imageFrame != null)
+            {
+                Image<Gray, byte> grayFrame = imageFrame.Convert<Gray, byte>();
+                Rectangle[] faces = classifier.DetectMultiScale(grayFrame, 1.2, 4);
+                foreach (var face in faces)
+                {
+                    imageFrame.Draw(face, new Bgr(Color.Green), 3);
+                    faceDetected = new Bitmap(face.Width, face.Height);
+                    painter = Graphics.FromImage(faceDetected);
+                    painter.DrawImage(grayFrame.Bitmap, 0, 0, face,GraphicsUnit.Pixel);
+                }
+            }
 
-        //    Image<Bgr, Byte> imageFrame = capture.QuerySmallFrame();
-            
-        //    if(imageFrame!=null)
-        //    {
-        //        Image<Gray, byte> grayFrame = imageFrame.Convert<Gray, byte>();
-        //        var faces = grayFrame.DetectHaarCascade(haar, 1.4, 4, HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(25, 25))[0];
-        //        foreach (var face in faces)
-        //        {
-        //            imageFrame.Draw(face.rect, new Bgr(Color.Green), 3);
-        //        }
-        //    }
-            
-        //    imageBox1.Image = imageFrame;
-        //}
+            pictureBox1.Image = imageFrame.Bitmap;
+        }
     }
 }
