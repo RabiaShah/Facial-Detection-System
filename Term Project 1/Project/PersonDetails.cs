@@ -16,7 +16,7 @@ namespace Project
         {
             InitializeComponent();
         }
-
+        
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -27,6 +27,26 @@ namespace Project
             MainMenu obj = new MainMenu();
             obj.Show();
             this.Hide();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PersonDetails_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pbFace_Click(object sender, EventArgs e)
+        {
+            //picture of the person from the databse
+        }
+
+        private void grpBoxDetails_Enter(object sender, EventArgs e)
+        {
+            //the details of the person from the database
         }
     }
 }

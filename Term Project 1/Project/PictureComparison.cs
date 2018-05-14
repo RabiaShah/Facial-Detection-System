@@ -28,5 +28,16 @@ namespace Project
             obj.Show();
             this.Hide();
         }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            //the image matched from the database (if any)..
+        }
+
+        private void pbCpaturedImg_Click(object sender, EventArgs e)
+        {
+            //the image captured from the webcam in LiveVideo
+            //or the image loaded/browsed from the computer
+        }
     }
 }

@@ -36,7 +36,7 @@ namespace Project
             if(obj.ShowDialog()==DialogResult.OK)
             {
                 img = new Image<Bgr, byte>(obj.FileName);
-                imageBox1.Image = img;
+                pbBrowsedImage.Image = img;
                 DetectFaces();
             }
         }
@@ -47,20 +47,20 @@ namespace Project
             {                
                 Image<Gray, byte> gray = img.Convert<Gray, byte>();
                 
-                imageBox1.Image = img;
-                string path = "haarcascade_frontalface_default.xml";
+                pbBrowsedImage.Image = img;
+                string path = "haarcascade_frontalface_default.xml";    //xml file for face detection
                 CascadeClassifier cass = new CascadeClassifier(path);
                 Rectangle[] faces = cass.DetectMultiScale(gray, 1.2, 4);
                 foreach (var face in faces)
                 {
                     img.Draw(face, new Bgr(0, 255, 0), 3);
-                    ExtFace = new Bitmap(face.Width, face.Height);
+                    ExtFace = new Bitmap(face.Width, face.Height);   //storing face which is in the rectangle of specified height and width
                     painter = Graphics.FromImage(ExtFace);
-                    painter.DrawImage(gray.Bitmap, 0, 0, face, GraphicsUnit.Pixel);
+                    painter.DrawImage(gray.Bitmap, 0, 0, face, GraphicsUnit.Pixel);   //converting the bitmap image into pixel units from gray image to extracted face (ExtFace)
                 }
                 MessageBox.Show("Faces detected: " + faces.Length);
-                imageBox1.Image = img;
-                imageBox2.Image = new Image<Bgr,Byte>(ExtFace);
+                pbBrowsedImage.Image = img;
+                pbDetectedFace.Image = new Image<Bgr,Byte>(ExtFace);
                 //pictureBox1.Image = ExtFace;
              
             }

@@ -32,7 +32,7 @@ namespace Project
         public LiveVideo()
         {
             
-            classifier = new CascadeClassifier("haarcascade_frontalface_default.xml");
+            classifier = new CascadeClassifier("haarcascade_frontalface_default.xml");    //the xm file for face detection, added along with opencv and wrapper class EmguCV
             videoSource = new VideoCaptureDevice();
             InitializeComponent();
         }
@@ -69,12 +69,12 @@ namespace Project
         private void video_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             Bitmap bitmap = (Bitmap)eventArgs.Frame.Clone();
-            pictureBox1.Image = bitmap;
+            pbVideo.Image = bitmap;
         }
-
+        
         private void button1_Click(object sender, EventArgs e)
         {
-            pictureBox2.Image = faceDetected;
+            pbCapturedImg.Image = faceDetected;
         }
         
         private void btnCheck_Click(object sender, EventArgs e)
@@ -86,15 +86,14 @@ namespace Project
             {
                 videoSource.Stop();
                 //capture.Dispose();
-            }
-            
-             
+            }    
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }
+        //method for detecting face from the frame and putting a rectangle around the face
         private void ProcessImage(object sender, EventArgs e)
         {
             Image<Bgr, Byte> imageFrame = new Image<Bgr,byte>(capture.QueryFrame().Bitmap);
@@ -105,13 +104,13 @@ namespace Project
                 foreach (var face in faces)
                 {
                     imageFrame.Draw(face, new Bgr(Color.Green), 3);
-                    faceDetected = new Bitmap(face.Width, face.Height);
+                    faceDetected = new Bitmap(face.Width, face.Height);    //storing face which is in the rectangle of specified height and width
                     painter = Graphics.FromImage(faceDetected);
                     painter.DrawImage(grayFrame.Bitmap, 0, 0, face,GraphicsUnit.Pixel);
                 }
             }
 
-            pictureBox1.Image = imageFrame.Bitmap;
+            pbVideo.Image = imageFrame.Bitmap;    
         }
     }
 }

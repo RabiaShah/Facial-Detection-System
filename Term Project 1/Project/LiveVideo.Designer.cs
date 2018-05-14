@@ -29,25 +29,25 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LiveVideo));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pbVideo = new System.Windows.Forms.PictureBox();
             this.cmbVideoDevices = new System.Windows.Forms.ComboBox();
             this.btnStart = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnCapture = new System.Windows.Forms.Button();
             this.btnCheck = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.pbCapturedImg = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVideo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCapturedImg)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // pbVideo
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(208, 79);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(505, 307);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pbVideo.Location = new System.Drawing.Point(208, 79);
+            this.pbVideo.Name = "pbVideo";
+            this.pbVideo.Size = new System.Drawing.Size(505, 307);
+            this.pbVideo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbVideo.TabIndex = 0;
+            this.pbVideo.TabStop = false;
+            this.pbVideo.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // cmbVideoDevices
             // 
@@ -75,20 +75,20 @@
             this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
-            // button1
+            // btnCapture
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button1.FlatAppearance.BorderSize = 2;
-            this.button1.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.MediumSpringGreen;
-            this.button1.Location = new System.Drawing.Point(629, 388);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(84, 31);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Capture";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnCapture.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnCapture.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnCapture.FlatAppearance.BorderSize = 2;
+            this.btnCapture.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCapture.ForeColor = System.Drawing.Color.MediumSpringGreen;
+            this.btnCapture.Location = new System.Drawing.Point(629, 388);
+            this.btnCapture.Name = "btnCapture";
+            this.btnCapture.Size = new System.Drawing.Size(84, 31);
+            this.btnCapture.TabIndex = 4;
+            this.btnCapture.Text = "Capture";
+            this.btnCapture.UseVisualStyleBackColor = false;
+            this.btnCapture.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnCheck
             // 
@@ -106,14 +106,14 @@
             this.btnCheck.UseVisualStyleBackColor = false;
             this.btnCheck.Click += new System.EventHandler(this.btnCheck_Click);
             // 
-            // pictureBox2
+            // pbCapturedImg
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(789, 79);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(160, 171);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox2.TabIndex = 3;
-            this.pictureBox2.TabStop = false;
+            this.pbCapturedImg.Location = new System.Drawing.Point(789, 79);
+            this.pbCapturedImg.Name = "pbCapturedImg";
+            this.pbCapturedImg.Size = new System.Drawing.Size(160, 171);
+            this.pbCapturedImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbCapturedImg.TabIndex = 3;
+            this.pbCapturedImg.TabStop = false;
             // 
             // LiveVideo
             // 
@@ -122,29 +122,29 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(978, 473);
             this.Controls.Add(this.btnCheck);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.btnCapture);
+            this.Controls.Add(this.pbCapturedImg);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.cmbVideoDevices);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pbVideo);
             this.Name = "LiveVideo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVideo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCapturedImg)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pbVideo;
         private System.Windows.Forms.ComboBox cmbVideoDevices;
         private System.Windows.Forms.Button btnStart;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCapture;
         private System.Windows.Forms.Button btnCheck;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pbCapturedImg;
     }
 }
 
