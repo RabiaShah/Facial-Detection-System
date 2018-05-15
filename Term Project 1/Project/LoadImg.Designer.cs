@@ -34,6 +34,8 @@
             this.btnCheck = new System.Windows.Forms.Button();
             this.pbBrowsedImage = new Emgu.CV.UI.ImageBox();
             this.pbDetectedFace = new Emgu.CV.UI.ImageBox();
+            this.btnPrev = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbBrowsedImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDetectedFace)).BeginInit();
             this.SuspendLayout();
@@ -102,12 +104,46 @@
             this.pbDetectedFace.TabIndex = 2;
             this.pbDetectedFace.TabStop = false;
             // 
+            // btnPrev
+            // 
+            this.btnPrev.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnPrev.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnPrev.FlatAppearance.BorderSize = 2;
+            this.btnPrev.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnPrev.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrev.ForeColor = System.Drawing.Color.MediumSpringGreen;
+            this.btnPrev.Location = new System.Drawing.Point(550, 300);
+            this.btnPrev.Name = "btnPrev";
+            this.btnPrev.Size = new System.Drawing.Size(49, 30);
+            this.btnPrev.TabIndex = 9;
+            this.btnPrev.Text = "<";
+            this.btnPrev.UseVisualStyleBackColor = false;
+            this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
+            // 
+            // btnNext
+            // 
+            this.btnNext.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnNext.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnNext.FlatAppearance.BorderSize = 2;
+            this.btnNext.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnNext.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNext.ForeColor = System.Drawing.Color.MediumSpringGreen;
+            this.btnNext.Location = new System.Drawing.Point(656, 300);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(49, 30);
+            this.btnNext.TabIndex = 10;
+            this.btnNext.Text = ">";
+            this.btnNext.UseVisualStyleBackColor = false;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
             // LoadImg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Project.Properties.Resources._31061468_976249289209152_3606521597940203520_n__1_;
             this.ClientSize = new System.Drawing.Size(947, 487);
+            this.Controls.Add(this.btnNext);
+            this.Controls.Add(this.btnPrev);
             this.Controls.Add(this.pbDetectedFace);
             this.Controls.Add(this.pbBrowsedImage);
             this.Controls.Add(this.btnCheck);
@@ -130,5 +166,7 @@
         private System.Windows.Forms.Button btnCheck;
         private Emgu.CV.UI.ImageBox pbBrowsedImage;
         private Emgu.CV.UI.ImageBox pbDetectedFace;
+        private System.Windows.Forms.Button btnPrev;
+        private System.Windows.Forms.Button btnNext;
     }
 }
