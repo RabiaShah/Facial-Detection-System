@@ -50,6 +50,10 @@ namespace Project
             try
             {                
                 Image<Gray, byte> gray = img.Convert<Gray, byte>();
+<<<<<<< HEAD
+=======
+                
+>>>>>>> 6b5399598405cc8a2c5d58668b60fc4db968f950
                 pbBrowsedImage.Image = img;
                 string path = "haarcascade_frontalface_default.xml";    //xml file for face detection
                 CascadeClassifier cass = new CascadeClassifier(path);
@@ -62,6 +66,7 @@ namespace Project
                     ExtFace = new Bitmap(face.Width, face.Height);   //storing face which is in the rectangle of specified height and width
                     painter = Graphics.FromImage(ExtFace);
                     painter.DrawImage(gray.Bitmap, 0, 0, face, GraphicsUnit.Pixel);   //converting the bitmap image into pixel units from gray image to extracted face (ExtFace)
+<<<<<<< HEAD
                     ExtractedFaces[faceNo] = ExtFace;
                     faceNo++;
                 }
@@ -69,6 +74,14 @@ namespace Project
                 pbBrowsedImage.Image = img;
                 pbDetectedFace.Image = new Image<Bgr, Byte>(ExtFace);
                 //pbDetectedFace.Image = new Image<Bgr, Byte>(ExtractedFaces[0]);
+=======
+                }
+                MessageBox.Show("Faces detected: " + faces.Length);
+                pbBrowsedImage.Image = img;
+                pbDetectedFace.Image = new Image<Bgr,Byte>(ExtFace);
+                //pictureBox1.Image = ExtFace;
+             
+>>>>>>> 6b5399598405cc8a2c5d58668b60fc4db968f950
             }
             catch (Exception ee)
             {

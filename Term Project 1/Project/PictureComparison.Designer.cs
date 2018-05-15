@@ -54,7 +54,10 @@
             this.pbCpaturedImg.Size = new System.Drawing.Size(266, 220);
             this.pbCpaturedImg.TabIndex = 1;
             this.pbCpaturedImg.TabStop = false;
+<<<<<<< HEAD
             this.pbCpaturedImg.Click += new System.EventHandler(this.pbCpaturedImg_Click);
+=======
+>>>>>>> 6b5399598405cc8a2c5d58668b60fc4db968f950
             // 
             // pbDBImage
             // 
