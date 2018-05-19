@@ -34,11 +34,10 @@
             this.btnCheck = new System.Windows.Forms.Button();
             this.pbBrowsedImage = new Emgu.CV.UI.ImageBox();
             this.pbDetectedFace = new Emgu.CV.UI.ImageBox();
-<<<<<<< HEAD
+
             this.btnPrev = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
-=======
->>>>>>> 6b5399598405cc8a2c5d58668b60fc4db968f950
+
             ((System.ComponentModel.ISupportInitialize)(this.pbBrowsedImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDetectedFace)).BeginInit();
             this.SuspendLayout();
@@ -106,7 +105,7 @@
             this.pbDetectedFace.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbDetectedFace.TabIndex = 2;
             this.pbDetectedFace.TabStop = false;
-<<<<<<< HEAD
+
             // 
             // btnPrev
             // 
@@ -139,8 +138,7 @@
             this.btnNext.Text = ">";
             this.btnNext.UseVisualStyleBackColor = false;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-=======
->>>>>>> 6b5399598405cc8a2c5d58668b60fc4db968f950
+
             // 
             // LoadImg
             // 
@@ -148,11 +146,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Project.Properties.Resources._31061468_976249289209152_3606521597940203520_n__1_;
             this.ClientSize = new System.Drawing.Size(947, 487);
-<<<<<<< HEAD
+
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnPrev);
-=======
->>>>>>> 6b5399598405cc8a2c5d58668b60fc4db968f950
+
             this.Controls.Add(this.pbDetectedFace);
             this.Controls.Add(this.pbBrowsedImage);
             this.Controls.Add(this.btnCheck);
@@ -175,10 +172,9 @@
         private System.Windows.Forms.Button btnCheck;
         private Emgu.CV.UI.ImageBox pbBrowsedImage;
         private Emgu.CV.UI.ImageBox pbDetectedFace;
-<<<<<<< HEAD
+
         private System.Windows.Forms.Button btnPrev;
         private System.Windows.Forms.Button btnNext;
-=======
->>>>>>> 6b5399598405cc8a2c5d58668b60fc4db968f950
+
     }
 }

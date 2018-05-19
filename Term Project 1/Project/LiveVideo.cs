@@ -32,11 +32,11 @@ namespace Project
         public LiveVideo()
         {
             
-<<<<<<< HEAD
+
             classifier = new CascadeClassifier("haarcascade_frontalface_default.xml");    //the xml file for face detection, added along with opencv and wrapper class EmguCV
-=======
+
             classifier = new CascadeClassifier("haarcascade_frontalface_default.xml");    //the xm file for face detection, added along with opencv and wrapper class EmguCV
->>>>>>> 6b5399598405cc8a2c5d58668b60fc4db968f950
+
             videoSource = new VideoCaptureDevice();
             InitializeComponent();
         }
