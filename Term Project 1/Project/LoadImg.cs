@@ -105,12 +105,19 @@ namespace Project
 
         private void btnPrev_Click(object sender, EventArgs e)
         {
-            if (faceNo < 1)
-                MessageBox.Show("No more Images!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            else
+            try
             {
-                faceNo--;
-                pbDetectedFace.Image = new Image<Bgr, Byte>(ExtractedFaces[faceNo]);
+                if (faceNo < 1)
+                    MessageBox.Show("No more Images!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                else
+                {
+                    faceNo--;
+                    pbDetectedFace.Image = new Image<Bgr, Byte>(ExtractedFaces[faceNo]);
+                }
+            }
+            catch(Exception ee)
+            {
+                MessageBox.Show(ee.Message);
             }
         }
     }
