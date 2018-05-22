@@ -34,6 +34,8 @@
             this.pbDBImage = new System.Windows.Forms.PictureBox();
             this.lblFound = new System.Windows.Forms.Label();
             this.btnDetails = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCpaturedImg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDBImage)).BeginInit();
@@ -54,9 +56,7 @@
             this.pbCpaturedImg.Size = new System.Drawing.Size(266, 220);
             this.pbCpaturedImg.TabIndex = 1;
             this.pbCpaturedImg.TabStop = false;
-
             this.pbCpaturedImg.Click += new System.EventHandler(this.pbCpaturedImg_Click);
-
             // 
             // pbDBImage
             // 
@@ -94,12 +94,34 @@
             this.btnDetails.UseVisualStyleBackColor = false;
             this.btnDetails.Click += new System.EventHandler(this.btnDetails_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(294, 185);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(123, 18);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Image captured";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(512, 185);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(264, 18);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Image retrieved from the database";
+            // 
             // PictureComparison
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(920, 487);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnDetails);
             this.Controls.Add(this.lblFound);
             this.Controls.Add(this.pbDBImage);
@@ -124,5 +146,7 @@
         private System.Windows.Forms.PictureBox pbDBImage;
         private System.Windows.Forms.Label lblFound;
         private System.Windows.Forms.Button btnDetails;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
