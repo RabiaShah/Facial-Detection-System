@@ -34,8 +34,7 @@
             this.pbDBImage = new System.Windows.Forms.PictureBox();
             this.lblFound = new System.Windows.Forms.Label();
             this.btnDetails = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCpaturedImg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDBImage)).BeginInit();
@@ -86,7 +85,7 @@
             this.btnDetails.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnDetails.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDetails.ForeColor = System.Drawing.Color.MediumSpringGreen;
-            this.btnDetails.Location = new System.Drawing.Point(442, 388);
+            this.btnDetails.Location = new System.Drawing.Point(326, 385);
             this.btnDetails.Name = "btnDetails";
             this.btnDetails.Size = new System.Drawing.Size(158, 48);
             this.btnDetails.TabIndex = 4;
@@ -94,25 +93,21 @@
             this.btnDetails.UseVisualStyleBackColor = false;
             this.btnDetails.Click += new System.EventHandler(this.btnDetails_Click);
             // 
-            // label1
+            // button1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(294, 185);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(123, 18);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Image captured";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(512, 185);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(264, 18);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Image retrieved from the database";
+            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button1.FlatAppearance.BorderSize = 2;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.button1.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.MediumSpringGreen;
+            this.button1.Location = new System.Drawing.Point(519, 385);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(193, 48);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Show Statistics";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // PictureComparison
             // 
@@ -120,8 +115,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(920, 487);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnDetails);
             this.Controls.Add(this.lblFound);
             this.Controls.Add(this.pbDBImage);
@@ -146,7 +140,6 @@
         private System.Windows.Forms.PictureBox pbDBImage;
         private System.Windows.Forms.Label lblFound;
         private System.Windows.Forms.Button btnDetails;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button1;
     }
 }

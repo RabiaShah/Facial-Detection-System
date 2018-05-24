@@ -39,5 +39,12 @@ namespace Project
             //the image captured from the webcam in LiveVideo
             //or the image loaded/browsed from the computer
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //ImageStatistics obj = new ImageStatistics();
+            //obj.Show();
+            
+        }
     }
 }
