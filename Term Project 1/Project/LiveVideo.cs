@@ -83,14 +83,28 @@ namespace Project
         
         private void btnCheck_Click(object sender, EventArgs e)
         {
-            PictureComparison obj = new PictureComparison();
-            obj.Show();
-            this.Hide();
+            Bitmap bmp = new Bitmap(266, 220);
             if(videoSource.IsRunning || capture!=null)
             {
                 videoSource.Stop();
                 //capture.Dispose();
-            }    
+            }
+
+            //for saving the captured image
+            //SaveFileDialog save = new SaveFileDialog();
+            //save.Filter = "Jpeg Image|*.jpg";
+            //if(save.ShowDialog()==DialogResult.OK)
+            //{
+                pbCapturedImg.DrawToBitmap(bmp, new Rectangle(0, 0, 266, 220));
+            //   bmp.Save(save.FileName,System.Drawing.Imaging.ImageFormat.Jpeg);
+            //}
+
+            //transferring the image into the next form i-e Picture Comparison
+            PictureComparison obj = new PictureComparison(bmp);
+
+            //opening the next form
+            obj.Show();
+            this.Hide();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

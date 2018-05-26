@@ -53,6 +53,7 @@
             this.pbCpaturedImg.Location = new System.Drawing.Point(218, 96);
             this.pbCpaturedImg.Name = "pbCpaturedImg";
             this.pbCpaturedImg.Size = new System.Drawing.Size(266, 220);
+            this.pbCpaturedImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pbCpaturedImg.TabIndex = 1;
             this.pbCpaturedImg.TabStop = false;
             this.pbCpaturedImg.Click += new System.EventHandler(this.pbCpaturedImg_Click);
@@ -62,6 +63,7 @@
             this.pbDBImage.Location = new System.Drawing.Point(510, 96);
             this.pbDBImage.Name = "pbDBImage";
             this.pbDBImage.Size = new System.Drawing.Size(266, 220);
+            this.pbDBImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbDBImage.TabIndex = 2;
             this.pbDBImage.TabStop = false;
             this.pbDBImage.Click += new System.EventHandler(this.pictureBox3_Click);

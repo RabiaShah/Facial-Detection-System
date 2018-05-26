@@ -81,6 +81,14 @@ namespace Project
             PictureComparison obj = new PictureComparison();
             obj.Show();
             this.Hide();
+            SaveFileDialog save = new SaveFileDialog();
+            save.Filter = "Jpeg Image|*.jpg";
+            if (save.ShowDialog() == DialogResult.OK)
+            {
+                Bitmap bmp = new Bitmap(pbDetectedFace.Width, pbDetectedFace.Height);
+                pbDetectedFace.DrawToBitmap(bmp, new Rectangle(0, 0, pbDetectedFace.Width, pbDetectedFace.Height));
+                bmp.Save(save.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+            }
         }
 
         private void LoadImg_Load(object sender, EventArgs e)

@@ -111,7 +111,7 @@
             this.pbCapturedImg.Location = new System.Drawing.Point(789, 79);
             this.pbCapturedImg.Name = "pbCapturedImg";
             this.pbCapturedImg.Size = new System.Drawing.Size(160, 171);
-            this.pbCapturedImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbCapturedImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbCapturedImg.TabIndex = 3;
             this.pbCapturedImg.TabStop = false;
             // 
