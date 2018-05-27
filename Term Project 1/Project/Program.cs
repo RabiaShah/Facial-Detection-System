@@ -16,7 +16,8 @@ namespace Project
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PictureComparison());
+
+            Application.Run(new MainMenu());
         }
     }
 }

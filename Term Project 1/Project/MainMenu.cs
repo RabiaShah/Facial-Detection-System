@@ -12,6 +12,7 @@ namespace Project
 {
     public partial class MainMenu : Form
     {
+
         public MainMenu()
         {
             InitializeComponent();
@@ -33,7 +34,7 @@ namespace Project
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

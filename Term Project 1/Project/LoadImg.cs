@@ -23,15 +23,15 @@ namespace Project
         Bitmap ExtFace;
         Graphics painter;
         Bitmap[] ExtractedFaces;
+        Bitmap bmp;
         int faceNo;
 
         public LoadImg()
         {
+            
             InitializeComponent();
             img = null;
             faceNo = 0;
-            //btnNext.Visible = false;
-            //btnPrev.Visible = false;
         }
 
         private void btnDetails_Click(object sender, EventArgs e)
@@ -81,14 +81,15 @@ namespace Project
             PictureComparison obj = new PictureComparison();
             obj.Show();
             this.Hide();
-            SaveFileDialog save = new SaveFileDialog();
-            save.Filter = "Jpeg Image|*.jpg";
-            if (save.ShowDialog() == DialogResult.OK)
-            {
-                Bitmap bmp = new Bitmap(pbDetectedFace.Width, pbDetectedFace.Height);
+            bmp = new Bitmap(pbDetectedFace.Width, pbDetectedFace.Height);
+            //SaveFileDialog save = new SaveFileDialog();
+            //save.Filter = "Jpeg Image|*.jpg";
+            //if (save.ShowDialog() == DialogResult.OK)
+            //{
+            //    
                 pbDetectedFace.DrawToBitmap(bmp, new Rectangle(0, 0, pbDetectedFace.Width, pbDetectedFace.Height));
-                bmp.Save(save.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
-            }
+            //    bmp.Save(save.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+            //}
         }
 
         private void LoadImg_Load(object sender, EventArgs e)
