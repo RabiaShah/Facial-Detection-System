@@ -11,6 +11,7 @@ namespace Project
     public class DBConnector
     {
         private MySqlConnection con;
+ 
         public DBConnector()
         {
             con = new MySqlConnection("server=localhost;user id=root;database=facesdb;password=rabia123");
@@ -24,7 +25,17 @@ namespace Project
             dt.Load(cmd.ExecuteReader());
             //int i = dt.Rows.Count;
             string str = dt.Rows[1].ItemArray[0].ToString();
+            con.Close();
             return dt;
         }
+        public DataTable GetPersonDetails(int id)
+        {
+            MySqlCommand cmd = new MySqlCommand("Select * from facesdb.facedetectiondb where EntryNo='" + id + "'", con);
+            DataTable dt = new DataTable();
+            dt.Load(cmd.ExecuteReader());
+            con.Close();
+            return dt;
+        }
+        
     }
 }

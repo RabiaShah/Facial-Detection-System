@@ -23,13 +23,22 @@ namespace Project
         Bitmap ExtFace;
         Graphics painter;
         Bitmap[] ExtractedFaces;
-        Bitmap bmp;
         int faceNo;
+        Image<Gray, byte> capturedImg;
+        Image<Gray, byte> DBImg;
+        int index = -1;
+        double check = 0,comp1=0;
+        DenseHistogram hist1, hist2;
+        Mat mat1, mat2;
+        DBConnector db;
+        DataTable dt;
 
         public LoadImg()
         {
             
             InitializeComponent();
+            db = new DBConnector();
+            dt = new DataTable();
             img = null;
             faceNo = 0;
         }
@@ -78,18 +87,71 @@ namespace Project
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            dt = db.GetData();   
+            Detection();
             PictureComparison obj = new PictureComparison();
+            obj.img = new Image<Gray, byte>(pbDetectedFace.Image.Bitmap);
+
+            obj.histogramBox1.ClearHistogram();
+            obj.histogramBox1.AddHistogram("Picture histogram", Color.Blue, mat1, 256, new float[] { 0.0f, 255.0f });
+            obj.histogramBox1.Refresh();
+            obj.SetIndex(index+1);
+
+            if(index>-1)
+            {
+             
+                obj.histogramBox2.ClearHistogram();
+                obj.histogramBox2.AddHistogram("Picture histogram", Color.Blue, mat2, 256, new float[] { 0.0f, 255.0f });
+                obj.histogramBox2.Refresh();
+
+                obj.img1 = new Image<Gray,byte>(dt.Rows[index].ItemArray[0].ToString());
+            }
             obj.Show();
             this.Hide();
-            bmp = new Bitmap(pbDetectedFace.Width, pbDetectedFace.Height);
-            //SaveFileDialog save = new SaveFileDialog();
-            //save.Filter = "Jpeg Image|*.jpg";
-            //if (save.ShowDialog() == DialogResult.OK)
-            //{
-            //    
-                pbDetectedFace.DrawToBitmap(bmp, new Rectangle(0, 0, pbDetectedFace.Width, pbDetectedFace.Height));
-            //    bmp.Save(save.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
-            //}
+        }
+        public void Detection()
+        {
+            check = comp1;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                
+                capturedImg = new Image<Gray, byte>(pbDetectedFace.Image.Bitmap);
+                DBImg = new Image<Gray, byte>((dt.Rows[i].ItemArray[0]).ToString());
+
+                hist1 = new DenseHistogram(256, new RangeF(0.0f, 255.0f));
+                hist2 = new DenseHistogram(256, new RangeF(0.0f, 255.0f));
+
+                hist1.Calculate(new Image<Gray, byte>[] { capturedImg }, false, null);
+                hist2.Calculate(new Image<Gray, byte>[] { DBImg }, false, null);
+
+                mat1 = new Mat();
+                hist1.CopyTo(mat1);
+                mat2 = new Mat();
+                hist2.CopyTo(mat2);
+
+                //float[] histFloat = new float[256];
+                //hist1.CopyTo(histFloat);
+
+                //float[] hist2Float = new float[256];
+                //hist2.CopyTo(hist2Float);
+
+                //double count1 = 0, count2 = 0;
+                //for (int j = 0; j < 256; j++)
+                //{
+                //    count1 += histFloat[j];
+                //    count2 += hist2Float[j];
+                //}
+
+                comp1 = CvInvoke.CompareHist(mat1, mat2, Emgu.CV.CvEnum.HistogramCompMethod.Correl);
+                if (comp1 > check && comp1<0.40 && comp1>0.221)
+                {
+                    check = comp1; 
+                    index = i;
+                    
+                }
+                
+            }
+            MessageBox.Show(check + " " + index.ToString());
         }
 
         private void LoadImg_Load(object sender, EventArgs e)
@@ -129,5 +191,6 @@ namespace Project
                 MessageBox.Show(ee.Message);
             }
         }
+
     }
 }

@@ -28,16 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PictureComparison));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pbCpaturedImg = new System.Windows.Forms.PictureBox();
-            this.pbDBImage = new System.Windows.Forms.PictureBox();
             this.lblFound = new System.Windows.Forms.Label();
             this.btnDetails = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.pbCapturedImg = new Emgu.CV.UI.ImageBox();
+            this.pbDBImg = new Emgu.CV.UI.ImageBox();
+            this.histogramBox1 = new Emgu.CV.UI.HistogramBox();
+            this.histogramBox2 = new Emgu.CV.UI.HistogramBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCpaturedImg)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbDBImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCapturedImg)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbDBImg)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -48,32 +50,13 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // pbCpaturedImg
-            // 
-            this.pbCpaturedImg.Location = new System.Drawing.Point(218, 96);
-            this.pbCpaturedImg.Name = "pbCpaturedImg";
-            this.pbCpaturedImg.Size = new System.Drawing.Size(266, 220);
-            this.pbCpaturedImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbCpaturedImg.TabIndex = 1;
-            this.pbCpaturedImg.TabStop = false;
-            this.pbCpaturedImg.Click += new System.EventHandler(this.pbCpaturedImg_Click);
-            // 
-            // pbDBImage
-            // 
-            this.pbDBImage.Location = new System.Drawing.Point(510, 96);
-            this.pbDBImage.Name = "pbDBImage";
-            this.pbDBImage.Size = new System.Drawing.Size(266, 220);
-            this.pbDBImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbDBImage.TabIndex = 2;
-            this.pbDBImage.TabStop = false;
-            this.pbDBImage.Click += new System.EventHandler(this.pictureBox3_Click);
-            // 
             // lblFound
             // 
             this.lblFound.AutoSize = true;
             this.lblFound.BackColor = System.Drawing.Color.Transparent;
             this.lblFound.Font = new System.Drawing.Font("Lucida Console", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFound.Location = new System.Drawing.Point(232, 337);
+            this.lblFound.ForeColor = System.Drawing.Color.Aquamarine;
+            this.lblFound.Location = new System.Drawing.Point(295, 22);
             this.lblFound.Name = "lblFound";
             this.lblFound.Size = new System.Drawing.Size(575, 32);
             this.lblFound.TabIndex = 3;
@@ -87,7 +70,7 @@
             this.btnDetails.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnDetails.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDetails.ForeColor = System.Drawing.Color.MediumSpringGreen;
-            this.btnDetails.Location = new System.Drawing.Point(326, 385);
+            this.btnDetails.Location = new System.Drawing.Point(395, 519);
             this.btnDetails.Name = "btnDetails";
             this.btnDetails.Size = new System.Drawing.Size(158, 48);
             this.btnDetails.TabIndex = 4;
@@ -95,41 +78,58 @@
             this.btnDetails.UseVisualStyleBackColor = false;
             this.btnDetails.Click += new System.EventHandler(this.btnDetails_Click);
             // 
-            // button1
+            // pbCapturedImg
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button1.FlatAppearance.BorderSize = 2;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.button1.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.MediumSpringGreen;
-            this.button1.Location = new System.Drawing.Point(519, 385);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(193, 48);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Show Statistics";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.pbCapturedImg.Location = new System.Drawing.Point(219, 82);
+            this.pbCapturedImg.Name = "pbCapturedImg";
+            this.pbCapturedImg.Size = new System.Drawing.Size(266, 204);
+            this.pbCapturedImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbCapturedImg.TabIndex = 2;
+            this.pbCapturedImg.TabStop = false;
+            // 
+            // pbDBImg
+            // 
+            this.pbDBImg.Location = new System.Drawing.Point(491, 82);
+            this.pbDBImg.Name = "pbDBImg";
+            this.pbDBImg.Size = new System.Drawing.Size(266, 204);
+            this.pbDBImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbDBImg.TabIndex = 6;
+            this.pbDBImg.TabStop = false;
+            // 
+            // histogramBox1
+            // 
+            this.histogramBox1.Location = new System.Drawing.Point(219, 292);
+            this.histogramBox1.Name = "histogramBox1";
+            this.histogramBox1.Size = new System.Drawing.Size(270, 174);
+            this.histogramBox1.TabIndex = 7;
+            // 
+            // histogramBox2
+            // 
+            this.histogramBox2.Location = new System.Drawing.Point(495, 292);
+            this.histogramBox2.Name = "histogramBox2";
+            this.histogramBox2.Size = new System.Drawing.Size(270, 174);
+            this.histogramBox2.TabIndex = 8;
             // 
             // PictureComparison
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(920, 487);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(920, 579);
+            this.Controls.Add(this.histogramBox2);
+            this.Controls.Add(this.histogramBox1);
+            this.Controls.Add(this.pbDBImg);
+            this.Controls.Add(this.pbCapturedImg);
             this.Controls.Add(this.btnDetails);
             this.Controls.Add(this.lblFound);
-            this.Controls.Add(this.pbDBImage);
-            this.Controls.Add(this.pbCpaturedImg);
             this.Controls.Add(this.pictureBox1);
             this.Name = "PictureComparison";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PictureComparison";
             this.Load += new System.EventHandler(this.PictureComparison_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCpaturedImg)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbDBImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCapturedImg)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbDBImg)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -138,10 +138,11 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pbCpaturedImg;
-        private System.Windows.Forms.PictureBox pbDBImage;
         private System.Windows.Forms.Label lblFound;
         private System.Windows.Forms.Button btnDetails;
-        private System.Windows.Forms.Button button1;
+        private Emgu.CV.UI.ImageBox pbCapturedImg;
+        private Emgu.CV.UI.ImageBox pbDBImg;
+        public Emgu.CV.UI.HistogramBox histogramBox1;
+        public Emgu.CV.UI.HistogramBox histogramBox2;
     }
 }

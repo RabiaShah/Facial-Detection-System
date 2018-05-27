@@ -27,13 +27,21 @@ namespace Project
         private CascadeClassifier classifier;
         private Bitmap faceDetected;
         private Graphics painter;
+        Image<Gray, byte> capturedImg;
+        Image<Gray, byte> DBImg;
+        int index = -1;
+        double check = 0, comp1 = 0;
+        DenseHistogram hist1, hist2;
+        Mat mat1, mat2;
+        DBConnector db;
+        DataTable dt;
         
         
         public LiveVideo()
         {
-            
 
-            classifier = new CascadeClassifier("haarcascade_frontalface_default.xml");    //the xml file for face detection, added along with opencv and wrapper class EmguCV
+            db = new DBConnector();
+            dt = new DataTable();
 
             classifier = new CascadeClassifier("haarcascade_frontalface_default.xml");    //the xm file for face detection, added along with opencv and wrapper class EmguCV
 
@@ -83,28 +91,33 @@ namespace Project
         
         private void btnCheck_Click(object sender, EventArgs e)
         {
-            Bitmap bmp = new Bitmap(266, 220);
+            dt = db.GetData();
             if(videoSource.IsRunning || capture!=null)
             {
                 videoSource.Stop();
                 //capture.Dispose();
             }
-
-            //for saving the captured image
-            //SaveFileDialog save = new SaveFileDialog();
-            //save.Filter = "Jpeg Image|*.jpg";
-            //if(save.ShowDialog()==DialogResult.OK)
-            //{
-                pbCapturedImg.DrawToBitmap(bmp, new Rectangle(0, 0, 266, 220));
-            //   bmp.Save(save.FileName,System.Drawing.Imaging.ImageFormat.Jpeg);
-            //}
-
+            Detection();
             //transferring the image into the next form i-e Picture Comparison
-            PictureComparison obj = new PictureComparison(bmp);
+                PictureComparison obj = new PictureComparison();
+                obj.img = new Image<Gray, byte>(faceDetected);
 
-            //opening the next form
-            obj.Show();
-            this.Hide();
+                obj.histogramBox1.ClearHistogram();
+                obj.histogramBox1.AddHistogram("Picture histogram", Color.Blue, mat1, 256, new float[] { 0.0f, 255.0f });
+                obj.histogramBox1.Refresh();
+                obj.SetIndex(index + 1);
+
+                if (index > -1)
+                {
+
+                    obj.histogramBox2.ClearHistogram();
+                    obj.histogramBox2.AddHistogram("Picture histogram", Color.Blue, mat2, 256, new float[] { 0.0f, 255.0f });
+                    obj.histogramBox2.Refresh();
+
+                    obj.img1 = new Image<Gray, byte>(dt.Rows[index].ItemArray[0].ToString());
+                }
+                obj.Show();
+                this.Hide();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -129,6 +142,38 @@ namespace Project
             }
 
             pbVideo.Image = imageFrame.Bitmap;    
+        }
+        public void Detection()
+        {
+            check = comp1;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+
+                capturedImg = new Image<Gray, byte>(faceDetected);
+                DBImg = new Image<Gray, byte>((dt.Rows[i].ItemArray[0]).ToString());
+
+                hist1 = new DenseHistogram(256, new RangeF(0.0f, 255.0f));
+                hist2 = new DenseHistogram(256, new RangeF(0.0f, 255.0f));
+
+                hist1.Calculate(new Image<Gray, byte>[] { capturedImg }, false, null);
+                hist2.Calculate(new Image<Gray, byte>[] { DBImg }, false, null);
+
+                mat1 = new Mat();
+                hist1.CopyTo(mat1);
+                mat2 = new Mat();
+                hist2.CopyTo(mat2);
+
+
+                comp1 = CvInvoke.CompareHist(mat1, mat2, Emgu.CV.CvEnum.HistogramCompMethod.Bhattacharyya);
+                if (comp1 > check )
+                {
+                    check = comp1;
+                    index = i;
+
+                }
+
+            }
+            MessageBox.Show(check + " " + index.ToString());
         }
     }
 }
