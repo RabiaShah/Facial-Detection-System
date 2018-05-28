@@ -42,6 +42,7 @@ namespace Project
 
         private void PictureComparison_Load(object sender, EventArgs e)
         {
+            
             pbCapturedImg.Image = img;
             
 
@@ -49,6 +50,8 @@ namespace Project
             if (img1 != null)
             {
                 lblFound.Text = "Match Found";
+                timerForColor.Start();
+                timerForColor.Enabled = true;
             }
             else
                 lblFound.Text = "No Record Found";
@@ -78,6 +81,16 @@ namespace Project
         {
             //ImageStatistics obj = new ImageStatistics();
             //obj.Show();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Random rand = new Random();
+            int alpha = rand.Next(0, 255);
+            int one = rand.Next(0,255);
+            int two = rand.Next(0,255);
+            lblFound.ForeColor = Color.FromArgb(alpha, two, one, two);
+            //lblFound.ForeColor = Color.Black;
         }
         
     }

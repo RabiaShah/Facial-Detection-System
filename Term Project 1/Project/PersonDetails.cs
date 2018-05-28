@@ -51,20 +51,30 @@ namespace Project
 
         private void PersonDetails_Load(object sender, EventArgs e)
         {
-            db = new DBConnector();
-            obj = new LoadImg();
-            dt = new DataTable();
-
-
-            if (index > 0)
+            try
             {
-                dt = db.GetPersonDetails(index);
-                lblName1.Text = dt.Rows[0].ItemArray[1].ToString();
-                lblGender1.Text = dt.Rows[0].ItemArray[4].ToString();
-                lblAge1.Text = dt.Rows[0].ItemArray[2].ToString();
-                lblNationality1.Text = dt.Rows[0].ItemArray[3].ToString();
-                lblCrime1.Text = dt.Rows[0].ItemArray[5].ToString();
-                pbFace.Image = new Image<Bgr, byte>(dt.Rows[0].ItemArray[6].ToString());
+                db = new DBConnector();
+                obj = new LoadImg();
+                dt = new DataTable();
+
+
+                if (index > 0)
+                {
+                    dt = db.GetPersonDetails(index);
+                    lblName1.Text = dt.Rows[0].ItemArray[1].ToString();
+                    lblGender1.Text = dt.Rows[0].ItemArray[4].ToString();
+                    lblAge1.Text = dt.Rows[0].ItemArray[2].ToString();
+                    lblNationality1.Text = dt.Rows[0].ItemArray[3].ToString();
+                    lblCrime1.Text = dt.Rows[0].ItemArray[5].ToString();
+                    pbFace.Image = new Image<Bgr, byte>(dt.Rows[0].ItemArray[6].ToString());
+                }
+            }catch(IndexOutOfRangeException indexer)
+            {
+                MessageBox.Show(indexer.Message);
+            }
+            catch(NullReferenceException nullreference)
+            {
+                MessageBox.Show(nullreference.Message);
             }
             
         }

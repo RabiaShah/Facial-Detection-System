@@ -37,6 +37,7 @@
             this.pbDBImg = new Emgu.CV.UI.ImageBox();
             this.histogramBox1 = new Emgu.CV.UI.HistogramBox();
             this.histogramBox2 = new Emgu.CV.UI.HistogramBox();
+            this.timerForColor = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCapturedImg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDBImg)).BeginInit();
@@ -54,11 +55,12 @@
             // 
             this.lblFound.AutoSize = true;
             this.lblFound.BackColor = System.Drawing.Color.Transparent;
+            this.lblFound.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblFound.Font = new System.Drawing.Font("Lucida Console", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFound.ForeColor = System.Drawing.Color.Aquamarine;
-            this.lblFound.Location = new System.Drawing.Point(295, 22);
+            this.lblFound.ForeColor = System.Drawing.Color.Turquoise;
+            this.lblFound.Location = new System.Drawing.Point(331, 20);
             this.lblFound.Name = "lblFound";
-            this.lblFound.Size = new System.Drawing.Size(575, 32);
+            this.lblFound.Size = new System.Drawing.Size(577, 34);
             this.lblFound.TabIndex = 3;
             this.lblFound.Text = "Match Found/ No Record Found";
             // 
@@ -110,6 +112,10 @@
             this.histogramBox2.Size = new System.Drawing.Size(270, 174);
             this.histogramBox2.TabIndex = 8;
             // 
+            // timerForColor
+            // 
+            this.timerForColor.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // PictureComparison
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -144,5 +150,6 @@
         private Emgu.CV.UI.ImageBox pbDBImg;
         public Emgu.CV.UI.HistogramBox histogramBox1;
         public Emgu.CV.UI.HistogramBox histogramBox2;
+        private System.Windows.Forms.Timer timerForColor;
     }
 }
