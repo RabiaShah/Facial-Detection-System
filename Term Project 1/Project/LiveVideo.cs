@@ -39,13 +39,24 @@ namespace Project
         
         public LiveVideo()
         {
+            try
+            {
 
-            db = new DBConnector();
-            dt = new DataTable();
+                db = new DBConnector();
+                dt = new DataTable();
 
-            classifier = new CascadeClassifier("haarcascade_frontalface_default.xml");    //the xm file for face detection, added along with opencv and wrapper class EmguCV
+                classifier = new CascadeClassifier("haarcascade_frontalface_default.xml");    //the xm file for face detection, added along with opencv and wrapper class EmguCV
 
-            videoSource = new VideoCaptureDevice();
+                videoSource = new VideoCaptureDevice();
+            }
+            catch(FieldAccessException file)
+            {
+                MessageBox.Show(file.Message);
+            }
+            catch(Exception ee)
+            {
+                MessageBox.Show(ee.Message);
+            }
             InitializeComponent();
         }
 
@@ -91,14 +102,16 @@ namespace Project
         
         private void btnCheck_Click(object sender, EventArgs e)
         {
-            dt = db.GetData();
-            if(videoSource.IsRunning || capture!=null)
+            try
             {
-                videoSource.Stop();
-                //capture.Dispose();
-            }
-            Detection();
-            //transferring the image into the next form i-e Picture Comparison
+                dt = db.GetData();
+                if (videoSource.IsRunning || capture != null)
+                {
+                    videoSource.Stop();
+                    //capture.Dispose();
+                }
+                Detection();
+                //transferring the image into the next form i-e Picture Comparison
                 PictureComparison obj = new PictureComparison();
                 obj.img = new Image<Gray, byte>(faceDetected);
 
@@ -118,6 +131,10 @@ namespace Project
                 }
                 obj.Show();
                 this.Hide();
+            }catch(Exception ee)
+            {
+                MessageBox.Show(ee.Message);
+            }
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -127,53 +144,64 @@ namespace Project
         //method for detecting face from the frame and putting a rectangle around the face
         private void ProcessImage(object sender, EventArgs e)
         {
-            Image<Bgr, Byte> imageFrame = new Image<Bgr,byte>(capture.QueryFrame().Bitmap);
-            if (imageFrame != null)
+            try
             {
-                Image<Gray, byte> grayFrame = imageFrame.Convert<Gray, byte>();
-                Rectangle[] faces = classifier.DetectMultiScale(grayFrame, 1.2, 4);
-                foreach (var face in faces)
+                Image<Bgr, Byte> imageFrame = new Image<Bgr, byte>(capture.QueryFrame().Bitmap);
+                if (imageFrame != null)
                 {
-                    imageFrame.Draw(face, new Bgr(Color.Green), 3);
-                    faceDetected = new Bitmap(face.Width, face.Height);    //storing face which is in the rectangle of specified height and width
-                    painter = Graphics.FromImage(faceDetected);
-                    painter.DrawImage(grayFrame.Bitmap, 0, 0, face,GraphicsUnit.Pixel);
+                    Image<Gray, byte> grayFrame = imageFrame.Convert<Gray, byte>();
+                    Rectangle[] faces = classifier.DetectMultiScale(grayFrame, 1.2, 4);
+                    foreach (var face in faces)
+                    {
+                        imageFrame.Draw(face, new Bgr(Color.Green), 3);
+                        faceDetected = new Bitmap(face.Width, face.Height);    //storing face which is in the rectangle of specified height and width
+                        painter = Graphics.FromImage(faceDetected);
+                        painter.DrawImage(grayFrame.Bitmap, 0, 0, face, GraphicsUnit.Pixel);
+                    }
                 }
-            }
 
-            pbVideo.Image = imageFrame.Bitmap;    
+                pbVideo.Image = imageFrame.Bitmap;
+            }catch(Exception ee)
+            { MessageBox.Show(ee.Message); }
         }
         public void Detection()
         {
-            check = comp1;
-            for (int i = 0; i < dt.Rows.Count; i++)
+            try
             {
-
-                capturedImg = new Image<Gray, byte>(faceDetected);
-                DBImg = new Image<Gray, byte>((dt.Rows[i].ItemArray[0]).ToString());
-
-                hist1 = new DenseHistogram(256, new RangeF(0.0f, 255.0f));
-                hist2 = new DenseHistogram(256, new RangeF(0.0f, 255.0f));
-
-                hist1.Calculate(new Image<Gray, byte>[] { capturedImg }, false, null);
-                hist2.Calculate(new Image<Gray, byte>[] { DBImg }, false, null);
-
-                mat1 = new Mat();
-                hist1.CopyTo(mat1);
-                mat2 = new Mat();
-                hist2.CopyTo(mat2);
-
-
-                comp1 = CvInvoke.CompareHist(mat1, mat2, Emgu.CV.CvEnum.HistogramCompMethod.Bhattacharyya);
-                if (comp1 > check )
+                check = comp1;
+                for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    check = comp1;
-                    index = i;
+
+                    capturedImg = new Image<Gray, byte>(faceDetected);
+                    DBImg = new Image<Gray, byte>((dt.Rows[i].ItemArray[0]).ToString());
+
+                    hist1 = new DenseHistogram(256, new RangeF(0.0f, 255.0f));
+                    hist2 = new DenseHistogram(256, new RangeF(0.0f, 255.0f));
+
+                    hist1.Calculate(new Image<Gray, byte>[] { capturedImg }, false, null);
+                    hist2.Calculate(new Image<Gray, byte>[] { DBImg }, false, null);
+
+                    mat1 = new Mat();
+                    hist1.CopyTo(mat1);
+                    mat2 = new Mat();
+                    hist2.CopyTo(mat2);
+
+
+                    comp1 = CvInvoke.CompareHist(mat1, mat2, Emgu.CV.CvEnum.HistogramCompMethod.Bhattacharyya);
+                    if (comp1 > check)
+                    {
+                        check = comp1;
+                        index = i;
+
+                    }
 
                 }
-
+                MessageBox.Show(check + " " + index.ToString());
             }
-            MessageBox.Show(check + " " + index.ToString());
+            catch(Exception ee)
+            {
+                MessageBox.Show(ee.Message);
+            }
         }
     }
 }

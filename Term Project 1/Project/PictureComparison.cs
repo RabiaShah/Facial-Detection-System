@@ -42,19 +42,23 @@ namespace Project
 
         private void PictureComparison_Load(object sender, EventArgs e)
         {
-            
-            pbCapturedImg.Image = img;
-            
-
-            pbDBImg.Image = img1;
-            if (img1 != null)
+            try
             {
-                lblFound.Text = "Match Found";
-                timerForColor.Start();
-                timerForColor.Enabled = true;
+                pbCapturedImg.Image = img;
+                pbDBImg.Image = img1;
+                if (img1 != null)
+                {
+                    lblFound.Text = "Match Found";
+                    timerForColor.Start();
+                    timerForColor.Enabled = true;
+                }
+                else
+                    lblFound.Text = "No Record Found";
             }
-            else
-                lblFound.Text = "No Record Found";
+            catch(Exception ee)
+            {
+                MessageBox.Show(ee.Message);
+            }
         }
 
         private void btnDetails_Click(object sender, EventArgs e)
@@ -90,7 +94,7 @@ namespace Project
             int one = rand.Next(0,255);
             int two = rand.Next(0,255);
             lblFound.ForeColor = Color.FromArgb(alpha, two, one, two);
-            //lblFound.ForeColor = Color.Black;
+
         }
         
     }

@@ -35,6 +35,9 @@ namespace VPassignment2
                 writer.WriteLine(result);
                 MessageBox.Show("The Record Has Been Successfully Deleted!");
                 writer.Close();
+                Main main = new Main();
+                main.Show();
+                this.Hide();
             }
             
         }

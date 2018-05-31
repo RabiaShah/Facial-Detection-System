@@ -13,7 +13,7 @@ namespace VPassignment2
     {
 
 
-        string path1 = @"happy.txt", path2 = @"Attendance.txt";
+        string path1 = @"happy.txt", path2 = @"C:\Users\rabia\Desktop\Attendance.txt";
         public string Path1
         {
             get
@@ -42,16 +42,18 @@ namespace VPassignment2
 
         public void CreateProfile(string StudentId, string Name, string Dept, string Uni, int Sem, float cgpa)
         {
-            StreamWriter obj = File.AppendText(path1);
-            obj.AutoFlush = true;
-            obj.WriteLine("Student ID: " + StudentId);
-            obj.WriteLine("Student Name: " + Name);
-            obj.WriteLine("Department: " + Dept);
-            obj.WriteLine("University: " + Uni);
-            obj.WriteLine("CGPA: " + cgpa.ToString());
-            obj.WriteLine("Semester: " + Sem);
-            obj.WriteLine("x");
-            obj.Close();
+            using (StreamWriter obj = File.AppendText(Path1)) 
+            {
+                //obj.AutoFlush = true;
+                obj.WriteLine("Student ID: " + StudentId);
+                obj.WriteLine("Student Name: " + Name);
+                obj.WriteLine("Department: " + Dept);
+                obj.WriteLine("University: " + Uni);
+                obj.WriteLine("CGPA: " + cgpa.ToString());
+                obj.WriteLine("Semester: " + Sem);
+                obj.WriteLine("x");
+                obj.Close();
+            }
             MessageBox.Show("Student Profile has been successfully created!");
         }
         public bool CheckUniqueID(string StudentId,out bool correct)

@@ -26,17 +26,29 @@ namespace VPassignment2
             InitializeComponent();
             panel2.AutoScroll=true;
             lbl6.Text = "Semester " + sem;
+            labl.Visible = false;
+            lbl4.Visible = false;
+            label2.Visible = false;
             label3.Visible = false;
             label4.Visible = false;
+            label5.Visible = false;
+            label6.Visible = false;
+            radioButton3.Visible = false;
+            radioButton4.Visible = false;
+            radioButton5.Visible = false;
+            radioButton6.Visible = false;
+            radioButton7.Visible = false;
+            radioButton8.Visible = false;
         }
 
         private void Mark_Attendance1_Load(object sender, EventArgs e)
         {
-            
+            int index = 0;
             StreamReader reader = new StreamReader(HelperClass.Help.Path1);
             s_record = reader.ReadToEnd();
             reader.Close();
             string[] Student_Array = s_record.Split('x').ToArray();
+            string[] Student_inf=new string[10];
             Label[] label=new Label[Student_Array.Length];
             RadioButton[] radioPresent = new RadioButton[Student_Array.Length];
             RadioButton[] radioAbsent = new RadioButton[Student_Array.Length];
@@ -52,7 +64,11 @@ namespace VPassignment2
                     //Name = Student_Array[i].Substring(Name_Index+3, ending_index-1);
                     std_count++;
                     Student_Info = (i+1)+".  "+ID;
+                    Student_inf[index] = Student_Info;
+                    index++;
                     label1.Text = Student_Info;
+
+                   
                     //label[i] = new Label();
                     //label[i].Location = new Point(3, 80 + labelPosition);
                     //label[i].Text = std_count + ".  " + Student_Info;
@@ -78,6 +94,24 @@ namespace VPassignment2
 
                     
                 }
+                
+            }
+            label1.Text = Student_inf[0];
+            label2.Visible = true;
+            label2.Text = Student_inf[1];
+            if (label2.Text != "")
+            {
+                radioButton3.Visible = true;
+                radioButton4.Visible = true;
+            }
+            
+            label3.Visible = true;
+            
+            label3.Text = Student_inf[2];
+            if (label3.Text != "")
+            {
+                radioButton5.Visible = true;
+                radioButton6.Visible = true;
             }
         }
 
@@ -87,24 +121,41 @@ namespace VPassignment2
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            StreamWriter writer = File.AppendText(@"C:\Users\rabia\Desktop\Attendance.txt");
-            writer.AutoFlush = true;
-            if (radioButton1.Checked)
+            //StreamWriter writer = File.AppendText(@"C:\Users\rabia\Desktop\Attendance.txt");
+            //writer.AutoFlush = true;
+            //if (radioButton1.Checked)
                 status = 'P';
-            Console.WriteLine();
-            writer.WriteLine("Semester: " + semester);
-            writer.WriteLine(Student_Info);
-            writer.WriteLine("Attendance: " + status);
-            writer.WriteLine("Date: " + DateTime.Now);
-            writer.WriteLine("x");
-            writer.Close();
+            //Console.WriteLine();
+            //writer.WriteLine("Semester: " + semester);
+            //writer.WriteLine(Student_Info);
+            //writer.WriteLine("Attendance: " + status);
+            //writer.WriteLine("Date: " + DateTime.Now);
+            //writer.WriteLine("x");
+            //writer.Close();
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            StreamWriter writer = File.AppendText(HelperClass.Help.Path2);
+            //StreamWriter writer = File.AppendText(HelperClass.Help.Path2);
+            //writer.AutoFlush = true;
+            //if (radioButton2.Checked)
+                status = 'A';
+            //Console.WriteLine();
+            //writer.WriteLine("Semester: " + semester);
+            //writer.WriteLine(Student_Info);
+            //writer.WriteLine("Attendance: " + status);
+            //writer.WriteLine("Date: " + DateTime.Now);
+            //writer.WriteLine("x");
+            //writer.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            StreamWriter writer = File.AppendText(@"C:\Users\rabia\Desktop\Attendance.txt");
             writer.AutoFlush = true;
-            if (radioButton2.Checked)
+            if (radioButton1.Checked || radioButton4.Checked || radioButton6.Checked)
+                status = 'P';
+            else
                 status = 'A';
             Console.WriteLine();
             writer.WriteLine("Semester: " + semester);
@@ -113,6 +164,10 @@ namespace VPassignment2
             writer.WriteLine("Date: " + DateTime.Now);
             writer.WriteLine("x");
             writer.Close();
+            MessageBox.Show("Attendance Submitted");
+            Main main = new Main();
+            main.Show();
+            this.Hide();
         }
     }
 }

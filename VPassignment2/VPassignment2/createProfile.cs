@@ -60,6 +60,7 @@ namespace VPassignment2
                 else
                 {
                     HelperClass.Help.CreateProfile(ID, Name, Dept, Uni, semester, cgpa);
+                    
                     Main f1 = new Main();
                     f1.Show();
                     this.Hide();

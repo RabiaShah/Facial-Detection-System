@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//using OpenCVWrapper;
+using OpenCVWrapper;
 
 
 namespace Project
@@ -88,71 +88,108 @@ namespace Project
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            dt = db.GetData();   
-            Detection();
-            PictureComparison obj = new PictureComparison();
-            obj.img = new Image<Gray, byte>(pbDetectedFace.Image.Bitmap);
-
-            obj.histogramBox1.ClearHistogram();
-            obj.histogramBox1.AddHistogram("Picture histogram", Color.Blue, mat1, 256, new float[] { 0.0f, 255.0f });
-            obj.histogramBox1.Refresh();
-            obj.SetIndex(index+1);
-
-            if(index>-1)
+            try
             {
-             
-                obj.histogramBox2.ClearHistogram();
-                obj.histogramBox2.AddHistogram("Picture histogram", Color.Blue, mat2, 256, new float[] { 0.0f, 255.0f });
-                obj.histogramBox2.Refresh();
+                dt = db.GetData();
+                Detection();
+                PictureComparison obj = new PictureComparison();
+                obj.img = new Image<Gray, byte>(pbDetectedFace.Image.Bitmap);
 
-                obj.img1 = new Image<Gray,byte>(dt.Rows[index].ItemArray[0].ToString());
+                obj.histogramBox1.ClearHistogram();
+                obj.histogramBox1.AddHistogram("Picture histogram", Color.Blue, mat1, 256, new float[] { 0.0f, 255.0f });
+                obj.histogramBox1.Refresh();
+                obj.SetIndex(index + 1);
+
+                if (index > -1)
+                {
+
+                    obj.histogramBox2.ClearHistogram();
+                    obj.histogramBox2.AddHistogram("Picture histogram", Color.Blue, mat2, 256, new float[] { 0.0f, 255.0f });
+                    obj.histogramBox2.Refresh();
+
+                    obj.img1 = new Image<Gray, byte>(dt.Rows[index].ItemArray[0].ToString());
+                }
+
+                obj.Show();
+                this.Hide();
             }
-            obj.Show();
-            this.Hide();
+            catch(IOException io)
+            {
+                MessageBox.Show(io.Message);
+            }
+            catch(Exception ee)
+            {
+                MessageBox.Show(ee.Message);
+            }
         }
         public void Detection()
         {
-            check = comp1;
-            for (int i = 0; i < dt.Rows.Count; i++)
+            try
             {
-                
-                capturedImg = new Image<Gray, byte>(pbDetectedFace.Image.Bitmap);
-                DBImg = new Image<Gray, byte>((dt.Rows[i].ItemArray[0]).ToString());
-
-                hist1 = new DenseHistogram(256, new RangeF(0.0f, 255.0f));
-                hist2 = new DenseHistogram(256, new RangeF(0.0f, 255.0f));
-
-                hist1.Calculate(new Image<Gray, byte>[] { capturedImg }, false, null);
-                hist2.Calculate(new Image<Gray, byte>[] { DBImg }, false, null);
-
-                mat1 = new Mat();
-                hist1.CopyTo(mat1);
-                mat2 = new Mat();
-                hist2.CopyTo(mat2);
-
-                //float[] histFloat = new float[256];
-                //hist1.CopyTo(histFloat);
-
-                //float[] hist2Float = new float[256];
-                //hist2.CopyTo(hist2Float);
-
-                //double count1 = 0, count2 = 0;
-                //for (int j = 0; j < 256; j++)
-                //{
-                //    count1 += histFloat[j];
-                //    count2 += hist2Float[j];
-                //}
-
-                comp1 = CvInvoke.CompareHist(mat1, mat2, Emgu.CV.CvEnum.HistogramCompMethod.Correl);
-                if (comp1 > check && comp1<0.40 && comp1>0.221)
+                check = comp1;
+                for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    check = comp1; 
-                    index = i;
-                    
+
+                    capturedImg = new Image<Gray, byte>(pbDetectedFace.Image.Bitmap);
+                    DBImg = new Image<Gray, byte>((dt.Rows[i].ItemArray[0]).ToString());
+
+                    hist1 = new DenseHistogram(256, new RangeF(0.0f, 255.0f));
+                    hist2 = new DenseHistogram(256, new RangeF(0.0f, 255.0f));
+
+                    hist1.Calculate(new Image<Gray, byte>[] { capturedImg }, false, null);
+                    hist2.Calculate(new Image<Gray, byte>[] { DBImg }, false, null);
+
+                    mat1 = new Mat();
+                    hist1.CopyTo(mat1);
+                    mat2 = new Mat();
+                    hist2.CopyTo(mat2);
+
+                    //float[] histFloat = new float[256];
+                    //hist1.CopyTo(histFloat);
+
+                    //float[] hist2Float = new float[256];
+                    //hist2.CopyTo(hist2Float);
+
+                    //double count1 = 0, count2 = 0;
+                    //for (int j = 0; j < 256; j++)
+                    //{
+                    //    count1 += histFloat[j];
+                    //    count2 += hist2Float[j];
+                    //}
+
+                    //unsafe
+                    //{
+                    //    fixed (char* ch = (dt.Rows[i].ItemArray[0]).ToString().ToCharArray())
+                    //    {
+                    //        fixed (char* ch2 = (dt.Rows[i].ItemArray[0]).ToString().ToCharArray())
+                    //        {
+                    //            OpenCVWrapper.OpencvWrapperClass obj = new OpencvWrapperClass();
+                    //            sbyte* pic1 = (sbyte*)ch2;
+                    //            sbyte* pic2 = (sbyte*)ch;
+                    //            comp1=obj.CompareHistogram(pic1, pic2);
+                    //        }
+                    //    }
+                    //}
+
+                    comp1 = CvInvoke.CompareHist(mat1, mat2, Emgu.CV.CvEnum.HistogramCompMethod.Correl);
+                    if (comp1 > check && comp1 < 0.40 && comp1 > 0.221)
+                    {
+                        check = comp1;
+                        index = i;
+
+                    }
+
                 }
-                
+                MessageBox.Show(check + " " + index.ToString());
             }
-            MessageBox.Show(check + " " + index.ToString());
+            catch(IndexOutOfRangeException index)
+            {
+                MessageBox.Show(index.Message);
+            }
+            catch(Exception ee)
+            {
+                MessageBox.Show(ee.Message);
+            }
         }
 
         private void LoadImg_Load(object sender, EventArgs e)
@@ -164,14 +201,20 @@ namespace Project
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-
-            if (faceNo > ExtractedFaces.Length-1)
-                MessageBox.Show("No more Images!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-            else
+            try
             {
-                faceNo++;
-                pbDetectedFace.Image = new Image<Bgr, Byte>(ExtractedFaces[faceNo]);
+
+                if (faceNo > ExtractedFaces.Length - 1)
+                    MessageBox.Show("No more Images!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                else
+                {
+                    faceNo++;
+                    pbDetectedFace.Image = new Image<Bgr, Byte>(ExtractedFaces[faceNo]);
+                }
+            }catch(Exception ee)
+            {
+                MessageBox.Show(ee.Message);
             }
         }
 
